@@ -33,15 +33,15 @@ training/ testing demo
 ├── requirements.txt
 ├── figures/
 ├── scripts/
-│   ├── cag/
-│   ├── rag_corpus/
-│   ├── fine_tune_biomedlm/
-│   └── chatbot/
+│   ├── cag.py
+│   ├── rag_corpus.py
+│   ├── fine_tune_biomedlm.py
+│   └── chatbot.py
 ├── results/
 │   ├── cag/
 │   ├── rag_corpus/
 │   ├── fine_tune_biomedlm/
-│   └── chatbot
+│   └── chatbot/
 </pre>
 
 
