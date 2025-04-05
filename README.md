@@ -24,9 +24,11 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 
 - The final chatbot operates within a confidence-aware pipeline. It prioritizes grounded responses using memory and retrieval context. If no sufficient evidence is found, the system transparently falls back to generating responses using BioMedLM’s internal knowledge. The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
 
+![Overview of model](figures/f1.png)
+
 ## Key Experiment Results
 
-![Overview of model](figures/f1.png)
+
 
 ## Instructions to run code
 Env/ dependency installments
