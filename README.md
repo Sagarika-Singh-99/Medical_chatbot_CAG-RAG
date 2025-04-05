@@ -18,7 +18,15 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 
 ## Project Formulation 
 
-## Results
+- We formulate the task of building a reliable medical chatbot that must balance memory retention, factual accuracy, and hallucination control. Given a user’s query Q, the system must recall relevant past interactions using CAG, retrieve factual documents using our medical corpus (selective RAG), and generate an accurate and contextually grounded response using a fine-tuned BioMedLM.
+
+- To achieve this, we construct a novel architecture that integrates CAG, powered by ChromaDB and MiniLM, to preserve multi-turn context across sessions, selective RAG, using a dual retriever setup (BM25 and MedCPT) fused via RRF for lexical and semantic relevance and fine-tuned BioMedLM on domain-specific QA datasets to serve as the generator.
+
+- The final chatbot operates within a confidence-aware pipeline. It prioritizes grounded responses using memory and retrieval context. If no sufficient evidence is found, the system transparently falls back to generating responses using BioMedLM’s internal knowledge. The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
+
+## Key Experiment Results
+
+![Overview of model](figures/f1.png)
 
 ## Instructions to run code
 Env/ dependency installments
