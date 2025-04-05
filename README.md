@@ -28,12 +28,7 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 
 ## Key Experiment Results
 
-
-
-## Instructions to run code
-Env/ dependency installments
-data prep
-training/ testing demo
+## Training/ Testing demo
 
 ## Directory Structure
 
@@ -55,6 +50,12 @@ training/ testing demo
 </pre>
 
 
+## Clone the repository
+
+```bash
+   git clone https://github.com/Sagarika-Singh-99/Medical_chatbot_CAG-RAG.git
+   cd Medical_chatbot_CAG-RAG
+```
 
 
 ## Reference 
