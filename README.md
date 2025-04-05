@@ -25,10 +25,31 @@ Env/ dependency installments
 data prep
 training/ testing demo
 
+## Directory Structure
+
+<pre> 
+ medical-chatbot-project/
+├── README.md
+├── requirements.txt
+├── figures/
+├── scripts/
+│   ├── cag/
+│   ├── rag_corpus/
+│   ├── fine_tune_biomedlm/
+│   └── chatbot/
+├── results/
+│   ├── cag/
+│   ├── rag_corpus/
+│   ├── fine_tune_biomedlm/
+│   └── chatbot
+</pre>
+
 
 
 
 ## Reference 
+
+BioMedLM: Bolton, E., Venigalla, A., Yasunaga, M., Hall, D., Xiong, B., Lee, T., Daneshjou, R., Frankle, J., Liang, P., Carbin, M., & Manning, C.D. (2024). BioMedLM: A 2.7B Parameter Language Model Trained On Biomedical Text. ArXiv, abs/2403.18421.
 
 Chan, Brian & Chen, Chao-Ting & Cheng, Jui-Hung & Huang, Hen-Hsen. (2024). Don't Do RAG: When Cache-Augmented Generation is All You Need for Knowledge Tasks. 10.48550/arXiv.2412.15605. 
 
