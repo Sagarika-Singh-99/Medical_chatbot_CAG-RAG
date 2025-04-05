@@ -1,1 +1,22 @@
+# Core frameworks
+transformers==4.37.2
+peft==0.9.0
+datasets==2.17.1
+torch==2.1.2
+sentence-transformers==2.3.1
+rank_bm25==0.2.2
+chromadb==0.4.22
+
+# Evaluation and visualization
+scikit-learn
+numpy
+matplotlib
+seaborn
+tqdm
+
+# Utilities
+uuid
+typing
+json
+os
 
