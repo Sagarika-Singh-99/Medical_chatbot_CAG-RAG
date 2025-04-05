@@ -1,9 +1,20 @@
 # Medical_chatbot_CAG-RAG
 
-## Author: Sagarika Singh 
+Author: Sagarika Singh (ss3038@rit.edu) ([LinkedIn](https://www.linkedin.com/in/sagarika-singh-938aa11bb/)) ([Google Scholar](https://scholar.google.com/citations?user=rKWm70MAAAAJ&hl=en&oi=ao))
+
+Institution: Rochester Institute of Technology (RIT)
 
 ## About 
 
+This project implements a medical chatbot that combines:
+
+- CAG (Cache-Augmented Generation) via ChromaDB,
+
+- Selective RAG (BM25 + MedCPT + RRF), and
+
+- A fine-tuned BioMedLM model.
+
+The system supports multi-turn conversations, reduces hallucinations, and grounds medical responses in reliable evidence.
 
 ## Project Formulation 
 
