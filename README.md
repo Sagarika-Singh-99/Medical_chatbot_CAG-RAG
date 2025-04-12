@@ -51,13 +51,36 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 </pre>
 
 
-## Clone the repository
+## Running the Project
 
+Clone the repository
 ```bash
    git clone https://github.com/Sagarika-Singh-99/Medical_chatbot_CAG-RAG.git
    cd Medical_chatbot_CAG-RAG
 ```
+Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
+GPU vs CPU Requirements:
+- The chatbot automatically uses GPU (via CUDA) if available.
+- On CPU, performance will be slower, but all features will still work.
+
+Model Downloads:
+On the first run, the following models will be downloaded from HuggingFace:
+- stanford-crfm/BioMedLM (LLM for generation)
+- sentence-transformers/all-MiniLM-L6-v2 (for dense retrieval)
+
+This may take a few minutes, depending on your internet connection.
+
+Before running the chatbot, ensure all the files are present in the correct structure. 
+
+To start the chatbot, run:
+
+```bash
+python chatbot.py
+```
 
 ## Reference 
 
@@ -85,5 +108,4 @@ MedQuAD: Ben Abacha, A., Demner-Fushman, D. A question-entailment approach to qu
 ## Acknowledgement 
 
 I would like to express my sincere gratitude to Prof. Zhiqiang Tao at Rochester Institute of Technology for their invaluable guidance, feedback, and support throughout the course of this project. Their insights were instrumental in shaping the direction of this work.
- 
  
