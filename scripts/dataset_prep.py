@@ -112,3 +112,24 @@ for qa in bioasq_data["questions"]:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
