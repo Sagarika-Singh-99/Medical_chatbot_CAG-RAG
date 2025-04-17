@@ -49,11 +49,13 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 ## Key Experiment Results
 
 ### 1. Medical Corpus - Selective RAG
-- Medical corpus has been created using datasets such as MedQuAD, MedMCQA, BioASQ_taskB, Symptoms & Precautions (from Kaggle)
-- Number of samples: 216,102
+- Medical corpus has been created using datasets - MedQuAD, MedMCQA, BioASQ_taskB, Symptoms & Precautions (from Kaggle)
+- Number of samples: 216,102 (corpus.pkl)
 - Column Names: ['doc_id', 'text', 'title', 'source', 'category', 'meta_json']
-- Retrieval methods used - BM25 (BM25 score), MedCPT (Cosine Similarity) and Reciprocal Rank Fusion (RRF).
-- BM25 : 
+- Retrieval methods used - BM25, MedCPT and Reciprocal Rank Fusion (RRF).
+- BM25: BM25_tokenized.pkl is created, which is the tokenized version of the corpus.pkl, using rank - bm25 package and BM250kapi. BM25 score will be used here to compare the query with the documents in BM25_tokenized.pkl.
+- MedCPT: dense_embeddings.pt is created which has the embeddings of the corpus.pkl, using ncbi/MedCPT-Article-Encoder (https://huggingface.co/ncbi/MedCPT-Article-Encoder). Cosine Similarity is used here to compare the query with the documents in  dense_embeddings.pt.
+- RRF: 
 
  
 
