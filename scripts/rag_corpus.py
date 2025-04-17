@@ -220,6 +220,60 @@ print("\n🔎 Sample Document:\n", corpus_df.sample(1).to_dict(orient="records")
 # Total samples
 print(f"\n📦 Total documents in corpus: {len(corpus_df)}")
 
+# 3. Create BM25_tokenized.pkl 
+pip install rank-bm25 sentence-transformers torch numpy
+
+# Torch Version: 2.0.1+cu118
+# Transformers Version: 4.31.0
+
+import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+import torch
+import pickle
+import pandas as pd
+from tqdm import tqdm
+from rank_bm25 import BM25Okapi
+from transformers import AutoTokenizer, AutoModel
+
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+# load the corpus we created above
+corpus_path = "RAG_corpus/final_corpus.pkl"
+corpus_df = pd.read_pickle(corpus_path)
+texts = corpus_df["text"].astype(str).tolist()
+print(f"📄 Loaded {len(texts)} texts")
+
+# === BM25 Tokenized ===
+print("🔍 Building BM25 tokenized index...")
+tokenized = [text.split() for text in texts]
+bm25 = BM25Okapi(tokenized)
+with open("RAG_corpus/bm25_tokenized.pkl", "wb") as f:
+    pickle.dump(bm25, f) # Corrected: Save the bm25 object
+
+# Create dense_embeddings.pt
+
+tokenizer = AutoTokenizer.from_pretrained("ncbi/MedCPT-Article-Encoder")
+model = AutoModel.from_pretrained("ncbi/MedCPT-Article-Encoder").to(device)
+model.eval()
+
+# encode embeddings 
+batch_size = 32
+embeddings = []
+
+with torch.no_grad():
+    for i in tqdm(range(0, len(texts), batch_size), desc="⚙️ Encoding"):
+        batch = texts[i:i + batch_size]
+        encoded = tokenizer(batch, return_tensors="pt", padding=True, truncation=True, max_length=512)
+        encoded = {k: v.to(device) for k, v in encoded.items()}
+        output = model(**encoded).last_hidden_state[:, 0, :]  # CLS
+        embeddings.append(output.cpu())
+
+all_embeds = torch.cat(embeddings, dim=0)
+torch.save(all_embeds, "RAG_corpus/dense_embeddings.pt")
+
+
 
 
 
