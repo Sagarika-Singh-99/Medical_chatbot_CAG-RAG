@@ -99,7 +99,7 @@ for qa in bioasq_data["questions"]:
 # processed BioASQ_taskB columns: ['question', 'answer', 'type', 'documents', 'snippets']
 
 ### 3. Symptoms & precautions created dataset from Kaggle
-# file is uploaded here in CSV format - path: Dataset/Kaggle_dataset_combined.csv
+# file is uploaded here in CSV format - path: Dataset/symp_pre.csv
 # Column names: ['Label', 'Def', 'Title', 'Source', 'Category']
 
 ### 4. MedMCQA dataset
