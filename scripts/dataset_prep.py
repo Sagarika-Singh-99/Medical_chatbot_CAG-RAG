@@ -98,6 +98,124 @@ for qa in bioasq_data["questions"]:
 # 'body' -> 'question', 'ideal_answer'-> 'answer', remove 'id', 'concepts'
 # processed BioASQ_taskB columns: ['question', 'answer', 'type', 'documents', 'snippets']
 
+### 3. Symptoms & precautions created dataset from Kaggle
+# file is uploaded here in CSV format - path: Dataset/Kaggle_dataset_combined.csv
+# Column names: ['Label', 'Def', 'Title', 'Source', 'Category']
+
+### 4. MedMCQA dataset
+# load dataset from Hugging Face
+
+import datasets
+
+def load_medmcqa_dataset():
+ 
+  try:
+    dataset = datasets.load_dataset("medmcqa")
+    return dataset
+  except Exception as e:
+    print(f"Error loading MedMCQA dataset: {e}")
+    return None
+
+if __name__ == "__main__":
+  medmcqa = load_medmcqa_dataset()
+  if medmcqa:
+    print("MedMCQA dataset loaded successfully!")
+    print(medmcqa)  # Print dataset information
+    # You can now access the data like this:
+    # print(medmcqa['train'][0])
+  else:
+    print("Failed to load MedMCQA dataset.")
+
+
+#  Column: ['id', 'question', 'opa', 'opb', 'opc', 'opd', 'cop', 'choice_type', 'exp', 'subject_name', 'topic_name']
+
+#process columns
+
+from datasets import load_dataset, Dataset
+import pandas as pd
+import torch
+import os
+from datetime import datetime
+
+
+# Create output directory
+output_dir = "cp_datasets/medmcqa_processed"
+os.makedirs(output_dir, exist_ok=True)
+
+# Load MedMCQA dataset
+print("Loading MedMCQA dataset...")
+dataset = load_dataset('medmcqa')
+
+# Function to process data into the desired format
+def process_data(data_items):
+    processed_data = {
+        'context': [],
+        'question': [],
+        'answer': []
+    }
+    
+    for item in data_items:
+        # Extract context (handle None values)
+        context = item['exp'] if item['exp'] is not None else ""
+        
+        # Extract question
+        question = item['question']
+        
+        # Extract answer - get the correct option based on 'cop'
+        options = [item['opa'], item['opb'], item['opc'], item['opd']]
+        cop_index = int(item['cop']) - 1  # Convert 1-based index to 0-based
+        answer = options[cop_index]
+        
+        # Add to processed data
+        processed_data['context'].append(context)
+        processed_data['question'].append(question)
+        processed_data['answer'].append(answer)
+    
+    return processed_data
+
+# Combine all splits into a single dataset
+print("Combining all splits into a single dataset...")
+all_data_items = []
+for split_name in dataset.keys():
+    all_data_items.extend(dataset[split_name])
+    print(f"Added {len(dataset[split_name])} examples from {split_name} split")
+
+# Process all data
+print("Processing combined dataset...")
+processed_data = process_data(all_data_items)
+print(f"Total processed examples: {len(processed_data['question'])}")
+
+# Convert to a Hugging Face dataset
+print("Converting to HuggingFace dataset...")
+hf_dataset = Dataset.from_dict(processed_data)
+
+# Save the processed dataset
+print(f"Saving processed dataset to {output_dir}...")
+hf_dataset.save_to_disk(output_dir)
+
+#  Column: ['id', 'question', 'opa', 'opb', 'opc', 'opd', 'cop', 'choice_type', 'exp', 'subject_name', 'topic_name']
+# After processing final columns, we get are: ['context', 'question', 'answer']
+# From the original column, we took 'question' as 'question and 'exp' as 'context'
+# How 'answer' was created: from 'cop' the correct option is triggered and correct word is extracted and saved in 'answer'. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
