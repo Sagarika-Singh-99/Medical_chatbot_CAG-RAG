@@ -12,7 +12,7 @@ This project implements a medical chatbot that combines:
 
 - Selective Retrieval-Augmented Generation (RAG) (BM25 + MedCPT + RRF), and
 
-- A fine-tuned BioMedLM model.
+
 
 The system supports multi-turn conversations, reduces hallucinations, and grounds medical responses in reliable evidence.
 
@@ -49,20 +49,33 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 ## Key Experiment Steps
 
 ### 1. Medical Corpus - Selective RAG
-- Medical corpus has been created using datasets - MedQuAD, MedMCQA, BioASQ_taskB, Symptoms & Precautions (from Kaggle)
+- Created Medical corpus using datasets - MedQuAD, MedMCQA, BioASQ_taskB, Symptoms & Precautions (from Kaggle)
 - Number of samples: 216,102 (corpus.pkl)
 - Column Names: ['doc_id', 'text', 'title', 'source', 'category', 'meta_json']
 - Retrieval methods used - BM25, MedCPT and Reciprocal Rank Fusion (RRF).
-- BM25: BM25_tokenized.pkl is created, which is the tokenized version of the corpus.pkl, using rank - bm25 package and BM250kapi. BM25 score will be used here to compare the query with the documents in BM25_tokenized.pkl.
-- MedCPT: dense_embeddings.pt is created which has the embeddings of the corpus.pkl, using ncbi/MedCPT-Article-Encoder (https://huggingface.co/ncbi/MedCPT-Article-Encoder). Cosine Similarity is used here to compare the query with the documents in  dense_embeddings.pt.
+- BM25: BM25_tokenized.pkl is created (only 'text'), which is the tokenized version of the corpus.pkl, using rank - bm25 package and BM250kapi. 
+- MedCPT: dense_embeddings.pt is created (only 'text'), which has the embeddings of the corpus.pkl, using ncbi/MedCPT-Article-Encoder (https://huggingface.co/ncbi/MedCPT-Article-Encoder).
+- This will help reduce hallucinations and ground medical responses in reliable evidence.
 
-##
++ word and semantic similairty
++ 
+### 2. Reciprocal Rank Fusion
+- After top 5 documents are retrieved through BM25_tokenized.pkl using BM25 score and dense_embeddings.pt using cosine similarity, using RRF score, we further select top 5 documents.
+- RRF formula: score = 1/(k + rank), where k = 60.
+- Documents found by both methods have the highest priority.
+- When documents have the same score and are found in different methods, then priority is given to the MedCPT system. 
 
-sentence-transformers/all-MiniLM-L6-v2
+### 3. Cache Augmented Generation via ChromaDB
+- Memory vector database is created using chromadb and embedding used is 'all-MiniLM-L6-v2' (dimension = 384) (check: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+- User query with bot response is stored here.
+- This will be retrieved when running the chatbot for providing past conversations context, to improve multi-turn conversations, and improve prompt memory. 
 
-Load Phi-2 model
-model_id = "microsoft/phi-2"
- 
+### 4. Prompt input file
+- Retrieved memory through CAG and retrieved documents from RAG are put in this file, along with the user query and prompt instructions.
+- This is used to generate the final response.
+
+### 5. Generate Response
+- A simple transformer phi-2 is used to generate response based on the prompt input file. (Check: https://huggingface.co/microsoft/phi-2)
 
 ## Training/ Testing demo
 
