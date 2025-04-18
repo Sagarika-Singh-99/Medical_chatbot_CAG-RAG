@@ -97,10 +97,15 @@ On the first run, the following models will be downloaded from HuggingFace:
 
 This may take a few minutes, depending on your internet connection.
 
-Before running the chatbot, ensure all the files are present in the correct structure. 
+Before running the chatbot, ensure all the files are present in the correct structure and the paths are correct.
 
+Before running the chatbot:
+```bash
+python dataset_prep.py
+python rag_corpus.py
+python cag.py
+```
 To start the chatbot, run:
-
 ```bash
 python chatbot.py
 ```
