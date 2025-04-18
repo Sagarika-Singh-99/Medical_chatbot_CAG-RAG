@@ -20,8 +20,6 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 
 - The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
 
-![Overview of model](results/chatbot/architecture_.png)
-
 ## Directory Structure
 
 <pre> 
@@ -68,6 +66,8 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 
 ### 5. Generate Response
 - A simple transformer Phi-2 is used to generate the response based on the prompt input file. 
+
+![Overview of model](results/chatbot/architecture_.png)
 
 ## Training/ Testing demo
 
