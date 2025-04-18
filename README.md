@@ -20,7 +20,7 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 
 - The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
 
-![Overview of model](figures/f1.png)
+![Overview of model](results/chatbot/architecture_.png)
 
 ## Directory Structure
 
