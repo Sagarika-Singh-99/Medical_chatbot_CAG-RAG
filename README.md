@@ -7,22 +7,18 @@ Institution: Rochester Institute of Technology (RIT)
 ## About 
 
 This project implements a medical chatbot that combines:
-
-- CAG (Cache-Augmented Generation) via ChromaDB,
-
-- Selective Retrieval-Augmented Generation (RAG) (BM25 + MedCPT + RRF), and
-
-
+- CAG (Cache-Augmented Generation) via ChromaDB.
+- Selective Retrieval-Augmented Generation (RAG) (BM25 + MedCPT + RRF).
 
 The system supports multi-turn conversations, reduces hallucinations, and grounds medical responses in reliable evidence.
 
 ## Project Formulation 
 
-- We formulate the task of building a reliable medical chatbot that must balance memory retention, factual accuracy, and hallucination control. Given a user’s query Q, the system must recall relevant past interactions using CAG, retrieve factual documents using our medical corpus (selective RAG), and generate an accurate and contextually grounded response using a fine-tuned BioMedLM.
+- We formulate the task of building a reliable medical chatbot that must balance memory retention, factual accuracy, and hallucination control. Given a user’s query Q, the system must recall relevant past interactions using CAG, retrieve factual documents using our medical corpus (selective RAG), and generate an accurate and contextually grounded response using Phi-2.
 
-- To achieve this, we construct a novel architecture that integrates CAG, powered by ChromaDB and MiniLM, to preserve multi-turn context across sessions, selective RAG, using a dual retriever setup (BM25 and MedCPT) fused via RRF for lexical and semantic relevance and fine-tuned BioMedLM on domain-specific QA datasets to serve as the generator.
+- To achieve this, we construct a novel architecture that integrates CAG, powered by ChromaDB and MiniLM, to preserve multi-turn context across sessions, selective RAG, using a dual retriever setup (BM25 and MedCPT) fused via RRF for lexical and semantic relevance and Phi-2 transformer to serve as the generator.
 
-- The final chatbot operates within a confidence-aware pipeline. It prioritizes grounded responses using memory and retrieval context. If no sufficient evidence is found, the system transparently falls back to generating responses using BioMedLM’s internal knowledge. The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
+- The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
 
 ![Overview of model](figures/f1.png)
 
@@ -36,13 +32,11 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 ├── scripts/
 │   ├── cag.py
 │   ├── rag_corpus.py
-│   ├── fine_tune_biomedlm.py
-|   ├── data_prep.py
+|   ├── dataset_prep.py
 │   └── chatbot.py
 ├── results/
 │   ├── cag/
 │   ├── rag_corpus/
-│   ├── fine_tune_biomedlm/
 │   └── chatbot/
 </pre>
 
@@ -53,20 +47,18 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 - Number of samples: 216,102 (corpus.pkl)
 - Column Names: ['doc_id', 'text', 'title', 'source', 'category', 'meta_json']
 - Retrieval methods used - BM25, MedCPT and Reciprocal Rank Fusion (RRF).
-- BM25: BM25_tokenized.pkl is created (only 'text'), which is the tokenized version of the corpus.pkl, using rank - bm25 package and BM250kapi. 
-- MedCPT: dense_embeddings.pt is created (only 'text'), which has the embeddings of the corpus.pkl, using ncbi/MedCPT-Article-Encoder (https://huggingface.co/ncbi/MedCPT-Article-Encoder).
+- BM25 (Word match): BM25_tokenized.pkl is created (only 'text'), which is the tokenized version of the corpus.pkl, using rank-bm25 package and BM250kapi. 
+- MedCPT (Semantic match): dense_embeddings.pt is created (only 'text'), which has the embeddings of the corpus.pkl, using ncbi/MedCPT-Article-Encoder (dimension = 768).
 - This will help reduce hallucinations and ground medical responses in reliable evidence.
 
-+ word and semantic similairty
-+ 
 ### 2. Reciprocal Rank Fusion
-- After top 5 documents are retrieved through BM25_tokenized.pkl using BM25 score and dense_embeddings.pt using cosine similarity, using RRF score, we further select top 5 documents.
-- RRF formula: score = 1/(k + rank), where k = 60.
+- After the top 5 documents are retrieved through BM25_tokenized.pkl using BM25 score and dense_embeddings.pt using cosine similarity, using RRF score, we further select top 5 documents.
+- RRF formula: score = 1/(60 + rank).
 - Documents found by both methods have the highest priority.
-- When documents have the same score and are found in different methods, then priority is given to the MedCPT system. 
+- When documents have the same score and are found in different methods, then priority is given to the MedCPT system, because MedCPT understands meanings & is more flexible.
 
 ### 3. Cache Augmented Generation via ChromaDB
-- Memory vector database is created using chromadb and embedding used is 'all-MiniLM-L6-v2' (dimension = 384) (check: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+- Memory vector database is created using chromadb, and embedding used is 'all-MiniLM-L6-v2' (dimension = 384).
 - User query with bot response is stored here.
 - This will be retrieved when running the chatbot for providing past conversations context, to improve multi-turn conversations, and improve prompt memory. 
 
@@ -75,10 +67,9 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 - This is used to generate the final response.
 
 ### 5. Generate Response
-- A simple transformer phi-2 is used to generate response based on the prompt input file. (Check: https://huggingface.co/microsoft/phi-2)
+- A simple transformer Phi-2 is used to generate the response based on the prompt input file. 
 
 ## Training/ Testing demo
-
 
 ## Key Results
 
@@ -100,8 +91,9 @@ GPU vs CPU Requirements:
 
 Model Downloads:
 On the first run, the following models will be downloaded from HuggingFace:
-- stanford-crfm/BioMedLM (LLM for generation)
-- sentence-transformers/all-MiniLM-L6-v2 (for dense retrieval)
+- sentence-transformers/all-MiniLM-L6-v2 (check: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+- microsoft/phi-2 (check: https://huggingface.co/microsoft/phi-2)
+- cbi/MedCPT-Article-Encoder (check: https://huggingface.co/ncbi/MedCPT-Article-Encoder).
 
 This may take a few minutes, depending on your internet connection.
 
