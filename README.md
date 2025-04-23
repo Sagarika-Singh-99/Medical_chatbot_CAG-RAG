@@ -128,15 +128,13 @@ Check: https://www.kaggle.com/datasets/itachi9604/disease-symptom-description-da
 
 ## Reference 
 
-BioMedLM: Bolton, E., Venigalla, A., Yasunaga, M., Hall, D., Xiong, B., Lee, T., Daneshjou, R., Frankle, J., Liang, P., Carbin, M., & Manning, C.D. (2024). BioMedLM: A 2.7B Parameter Language Model Trained On Biomedical Text. ArXiv, abs/2403.18421.
-
-Chan, Brian & Chen, Chao-Ting & Cheng, Jui-Hung & Huang, Hen-Hsen. (2024). Don't Do RAG: When Cache-Augmented Generation is All You Need for Knowledge Tasks. 10.48550/arXiv.2412.15605. 
-
-Guangzhi Xiong, Qiao Jin, Zhiyong Lu, and Aidong Zhang. 2024. Benchmarking Retrieval-Augmented Generation for Medicine. In Findings of the Association for Computational Linguistics: ACL 2024, pages 6233–6251, Bangkok, Thailand. Association for Computational Linguistics.
+Guangzhi Xiong, Qiao Jin, Zhiyong Lu, and Aidong Zhang. 2024. Benchmarking Retrieval-Augmented Generation for Medicine. In Findings of the Association for Computational Linguistics: ACL 2024, pages 6233–6251, Bangkok, Thailand. Association for Computational Linguistics, https://aclanthology.org/2024.findings-acl.372/
 
 Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin, Tat-Seng Chua, and Qing Li. 2024. A Survey on RAG Meeting LLMs: Towards Retrieval-Augmented Large Language Models. In Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '24). Association for Computing Machinery, New York, NY, USA, 6491–6501. https://doi.org/10.1145/3637528.3671470
 
 Bora, A., & Cuayáhuitl, H. (2024). Systematic Analysis of Retrieval-Augmented Generation-Based LLMs for Medical Chatbot Applications. Machine Learning and Knowledge Extraction, 6(4), 2355-2374. https://doi.org/10.3390/make6040116
+
+Banerjee, Sourav & Agarwal, Ayushi & Singla, Saloni. (2024). LLMs Will Always Hallucinate, and We Need to Live With This, https://arxiv.org/abs/2409.05746
 
 ## Acknowledgement 
 
