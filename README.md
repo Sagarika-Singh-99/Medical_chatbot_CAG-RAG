@@ -1,22 +1,26 @@
-# Medical_chatbot_CAG-RAG
+# Memory-Retrieval Chatbot: Enhancing Trust in Medical Chatbot          
 
 Author: Sagarika Singh (ss3038@rit.edu) ([LinkedIn](https://www.linkedin.com/in/sagarika-singh-938aa11bb/)) ([Google Scholar](https://scholar.google.com/citations?user=rKWm70MAAAAJ&hl=en&oi=ao))
 
 Institution: Rochester Institute of Technology (RIT)
 
+RIT Capstone Project Link: 
+
+Poster Link: 
+
 ## About 
 
-This project implements a medical chatbot that combines:
-- CAG (Cache-Augmented Generation) via ChromaDB.
-- Selective Retrieval-Augmented Generation (RAG) (BM25 + MedCPT + RRF).
+Large language models (LLMs) often struggle with hallucinations and context retention, especially in medical dialogues where accuracy is critical. This project proposes a hybrid memory-retrieval chatbot architecture that combines Phi-2, a compact LLM, with ChromaDB-based memory and Selective Retrieval-Augmented Generation (RAG) using BM25, MedCPT, and Reciprocal Rank Fusion (RRF). ChromaDB anchors conversations with prior user interactions, while the dual retrievers ensure real-time access to verified external medical content. The system dynamically merges memory and document contexts, generating responses that are both context-aware and semantically grounded. Experimental results on the MedQuAD dataset demonstrate substantial gains in semantic fidelity (BERTScore F1 = 0.8644) compared to baseline RAG models, with improved fluency through memory inclusion and reduced hallucination tendencies via fallback handling. This approach enhances trustworthiness in medical chatbot applications by ensuring safer, more relevant responses.
 
-The system supports multi-turn conversations, reduces hallucinations, and grounds medical responses in reliable evidence.
+## Keyword
+
+Hybrid Medical Chatbot, ChromaDB, Advanced RAG, Phi-2, Hallucination Mitigation
 
 ## Project Formulation 
 
-- We formulate the task of building a reliable medical chatbot that must balance memory retention, factual accuracy, and hallucination control. Given a user’s query Q, the system must recall relevant past interactions using CAG, retrieve factual documents using our medical corpus (selective RAG), and generate an accurate and contextually grounded response using Phi-2.
+- We formulate the task of building a reliable medical chatbot that must balance memory retention, factual accuracy, and hallucination control. Given a user’s query Q, the system must recall relevant past interactions (MR-ChromaDB), retrieve factual documents using our medical corpus (Advanced RAG), and generate an accurate and contextually grounded response using Phi-2.
 
-- To achieve this, we construct a novel architecture that integrates CAG, powered by ChromaDB and MiniLM, to preserve multi-turn context across sessions, selective RAG, using a dual retriever setup (BM25 and MedCPT) fused via RRF for lexical and semantic relevance and Phi-2 transformer to serve as the generator.
+- To achieve this, we construct a novel architecture that integrates Memory Retrieval, powered by ChromaDB and MiniLM, to preserve multi-turn context across sessions, Advanced RAG, using a dual retriever setup (BM25 and MedCPT) fused via RRF for lexical and semantic relevance and Phi-2 transformer-based language model to serve as the generator.
 
 - The objective is to reduce hallucinations, enhance semantic coherence, and improve user experience in long-term interactions.
 
@@ -53,15 +57,18 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 - After the top 5 documents are retrieved through BM25_tokenized.pkl using BM25 score and dense_embeddings.pt using cosine similarity, using RRF score, we further select top 5 documents.
 - RRF formula: score = 1/(60 + rank).
 - Documents found by both methods have the highest priority.
-- When documents have the same score and are found in different methods, then priority is given to the MedCPT system, because MedCPT understands meanings & is more flexible.
+- When documents have the same score and are found in different methods, then priority is given to the documents in BM25 system. One document of MedCPT system was for sure included.
 
-### 3. Cache Augmented Generation via ChromaDB
+### 3. Memory Retrieval via ChromaDB
 - Memory vector database is created using chromadb, and embedding used is 'all-MiniLM-L6-v2' (dimension = 384).
 - User query with bot response is stored here.
-- This will be retrieved when running the chatbot for providing past conversations context, to improve multi-turn conversations, and improve prompt memory. 
+- This will be retrieved when running the chatbot for providing past conversations context, to improve multi-turn conversations, and improve prompt memory.
+- Memories are extracted using Cosine Similarity with a threshold of 0.4, and a maximum of 2 memories are selected. 
 
 ### 4. Prompt input file
-- Retrieved memory through CAG and retrieved documents from RAG are put in this file, along with the user query and prompt instructions.
+- Retrieved memory and retrieved documents from RAG are put in this file, along with the user query and prompt instructions.
+- Structure of prompt file: Instructions, Query, Documents, Memories, Answer.
+- Maximum tokens = 1024
 - This is used to generate the final response.
 
 ### 5. Generate Response
