@@ -67,7 +67,7 @@ The system supports multi-turn conversations, reduces hallucinations, and ground
 ### 5. Generate Response
 - A simple transformer Phi-2 is used to generate the response based on the prompt input file. 
 
-![Overview of model](results/chatbot/architecture_.png)
+![Overview of model](results/chatbot/arch_v3.png)
 
 ## Training/ Testing demo
 
