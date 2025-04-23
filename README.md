@@ -80,6 +80,15 @@ Hallucination Mitigation, ChromaDB, Advanced RAG, Phi-2, Medical Chatbot, Memory
 
 ## Key Results
 
+Comparative performance of our medical chatbot system against baseline (20 samples)
+
+| **Metrics**       | **Mistral with RAG (baseline) [3]** | **Fine-tuned Mistral with RAG (baseline) [3]** | **Our System**         |
+|-------------------|-------------------------------------|------------------------------------------------|-------------------------|
+| **Dataset**       | Meadow-MedQA                        | Meadow-MedQA                                   | MedQuAD                 |
+| **BERTScore F1**  | 0.181                               | 0.221                                          | 🟢 **0.8644**           |
+| **Rouge-L**       | 0.2512                              | 0.221                                          | 0.2273                  |
+| **Perplexity**    | 6.4691                              | 4.84                                           | 🔴 **12.8758**          |
+| **Avg. Time (s)** | 78                                  | 150                                            | 🟢 **28**               |
 
 
 ## Running the Project
@@ -137,13 +146,13 @@ Check: https://www.kaggle.com/datasets/itachi9604/disease-symptom-description-da
 
 ## Reference 
 
-Guangzhi Xiong, Qiao Jin, Zhiyong Lu, and Aidong Zhang. 2024. Benchmarking Retrieval-Augmented Generation for Medicine. In Findings of the Association for Computational Linguistics: ACL 2024, pages 6233–6251, Bangkok, Thailand. Association for Computational Linguistics, https://aclanthology.org/2024.findings-acl.372/
+[1] Guangzhi Xiong, Qiao Jin, Zhiyong Lu, and Aidong Zhang. 2024. Benchmarking Retrieval-Augmented Generation for Medicine. In Findings of the Association for Computational Linguistics: ACL 2024, pages 6233–6251, Bangkok, Thailand. Association for Computational Linguistics, https://aclanthology.org/2024.findings-acl.372/
 
-Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin, Tat-Seng Chua, and Qing Li. 2024. A Survey on RAG Meeting LLMs: Towards Retrieval-Augmented Large Language Models. In Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '24). Association for Computing Machinery, New York, NY, USA, 6491–6501. https://doi.org/10.1145/3637528.3671470
+[2] Wenqi Fan, Yujuan Ding, Liangbo Ning, Shijie Wang, Hengyun Li, Dawei Yin, Tat-Seng Chua, and Qing Li. 2024. A Survey on RAG Meeting LLMs: Towards Retrieval-Augmented Large Language Models. In Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '24). Association for Computing Machinery, New York, NY, USA, 6491–6501. https://doi.org/10.1145/3637528.3671470
 
-Bora, A., & Cuayáhuitl, H. (2024). Systematic Analysis of Retrieval-Augmented Generation-Based LLMs for Medical Chatbot Applications. Machine Learning and Knowledge Extraction, 6(4), 2355-2374. https://doi.org/10.3390/make6040116
+[3] Bora, A., & Cuayáhuitl, H. (2024). Systematic Analysis of Retrieval-Augmented Generation-Based LLMs for Medical Chatbot Applications. Machine Learning and Knowledge Extraction, 6(4), 2355-2374. https://doi.org/10.3390/make6040116
 
-Banerjee, Sourav & Agarwal, Ayushi & Singla, Saloni. (2024). LLMs Will Always Hallucinate, and We Need to Live With This, https://arxiv.org/abs/2409.05746
+[4] Banerjee, Sourav & Agarwal, Ayushi & Singla, Saloni. (2024). LLMs Will Always Hallucinate, and We Need to Live With This, https://arxiv.org/abs/2409.05746
 
 ## Acknowledgement 
 
