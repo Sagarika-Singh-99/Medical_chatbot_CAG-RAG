@@ -14,7 +14,7 @@ Large language models (LLMs) often struggle with hallucinations and context rete
 
 ## Keyword
 
-Hybrid Medical Chatbot, ChromaDB, Advanced RAG, Phi-2, Hallucination Mitigation
+Hallucination Mitigation, ChromaDB, Advanced RAG, Phi-2, Medical Chatbot, Memory Retrieval 
 
 ## Project Formulation 
 
@@ -79,6 +79,8 @@ Hybrid Medical Chatbot, ChromaDB, Advanced RAG, Phi-2, Hallucination Mitigation
 ## Training/ Testing demo
 
 ## Key Results
+
+
 
 ## Running the Project
 
