@@ -90,10 +90,15 @@ Comparative performance of our medical chatbot system against baseline (20 sampl
 | **Perplexity**    | 6.4691                              | 4.84                                           | 🔴 **12.8758**          |
 | **Avg. Time (s)** | 78                                  | 150                                            | 🟢 **28**               |
 
+- High BERTScore F1: strong semantic alignment with ground truth.
+- Higher perplexity: slightly reduced fluency.
+- Lower processing time: the model gives responses way faster.
 
 BERTScore F1 across 20 test Q/A (MedQuAD) from our hybrid system
 
 ![](results/chatbot/chtabot_bertscore_f1.png)
+
+- Consistently high scores (+0.85) indicate strong semantic alignment with ground truth, suggesting low hallucination tendencies.
 
 Impact of Memory Context on Performance
 
@@ -103,6 +108,7 @@ Impact of Memory Context on Performance
 | **1 Memory**       | 0.852                  | 10.23                 |
 | **2 Memory**       | 🔴 **0.84727**         | 🟢 **8.69**           |
 
+- Memory context improves fluency but does not consistently enhance semantic accuracy.
 
 ## Running the Project
 
