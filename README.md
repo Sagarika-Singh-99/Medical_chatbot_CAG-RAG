@@ -91,6 +91,19 @@ Comparative performance of our medical chatbot system against baseline (20 sampl
 | **Avg. Time (s)** | 78                                  | 150                                            | 🟢 **28**               |
 
 
+BERTScore F1 across 20 test Q/A (MedQuAD) from our hybrid system
+
+![](results/chatbot/chtabot_bertscore_f1.png)
+
+Impact of Memory Context on Performance
+
+| **Memory Context** | **BERTScore F1**      | **Perplexity**       |
+|--------------------|------------------------|-----------------------|
+| **None**           | 0.8692                 | 11.595                |
+| **1 Memory**       | 0.852                  | 10.23                 |
+| **2 Memory**       | 🔴 **0.84727**         | 🟢 **8.69**           |
+
+
 ## Running the Project
 
 Clone the repository
