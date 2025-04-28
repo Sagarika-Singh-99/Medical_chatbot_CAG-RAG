@@ -1,4 +1,4 @@
-# Memory-Retrieval Chatbot: Enhancing Trust in Medical Chatbot          
+# Hybrid Memory-Retrieval Model: Enhancing Trust in Medical Chatbot          
 
 Author: Sagarika Singh (ss3038@rit.edu) ([LinkedIn](https://www.linkedin.com/in/sagarika-singh-938aa11bb/)) ([Google Scholar](https://scholar.google.com/citations?user=rKWm70MAAAAJ&hl=en&oi=ao))
 
