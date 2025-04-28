@@ -41,7 +41,6 @@ Hallucination Mitigation, ChromaDB, Advanced RAG, Phi-2, Medical Chatbot, Memory
 |   ├── dataset_prep.py
 │   └── chatbot.py
 ├── results/
-│   ├── cag/
 │   ├── rag_corpus/
 │   └── chatbot/
 </pre>
