@@ -4,9 +4,8 @@ Author: Sagarika Singh (ss3038@rit.edu) ([LinkedIn](https://www.linkedin.com/in/
 
 Institution: Rochester Institute of Technology (RIT)
 
-RIT Capstone Project Link: 
+([Poster Link](https://www.rit.edu/msaicapstone/sites/rit.edu.msaicapstone/files/docs/2025_MSAI_posters/PRINT_152448-2134537%20-%20Singh%2C%20Sagarika%20-%20capstone_poster_final.pdf))
 
-Poster Link: 
 
 ## About 
 
